@@ -1,0 +1,9 @@
+name: RoR2-4m
+version: '${project.version}'
+main: tech.adelemphii.ror24m.RoR24m
+api-version: 1.16
+prefix: RoR2-4m
+depend: [ WorldGuard, WorldEdit ]
+authors: [ Adelemphii ]
+description: RoR2-4m | Risk of Rain 2 - For Minecraft || An attempted remake of Risk of Rain 2 systems and mechanics in Minecraft.
+website: www.adelemphii.tech
