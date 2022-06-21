@@ -4,12 +4,15 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Subcommand;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.util.RayTraceResult;
 import tech.adelemphii.ror24m.RoR24m;
 import tech.adelemphii.ror24m.directors.interactables.Interactable;
 import tech.adelemphii.ror24m.directors.interactables.InteractableType;
+import tech.adelemphii.ror24m.directors.item.Item;
+import tech.adelemphii.ror24m.directors.item.ItemRarity;
 
 @CommandAlias("ror24m|ror2")
 public class TestCommand extends BaseCommand {
@@ -20,7 +23,6 @@ public class TestCommand extends BaseCommand {
         this.plugin = plugin;
     }
 
-    @Default
     @Subcommand("spawn")
     public void spawn(Player player, InteractableType type) {
         RayTraceResult rayTraceResult = player.rayTraceBlocks(10);
@@ -38,8 +40,15 @@ public class TestCommand extends BaseCommand {
             }
         }
 
+        Component[] lore = {
+                Component.text("Killing an enemy ignites all enemies within 12m (+4m per stack) for 150% base damage."),
+                        Component.text("Additionally, enemies burn for 150% (+75% per stack) base damage.")
+        };
+
+        Item item = new Item(Material.FLINT_AND_STEEL, "Gasoline", ItemRarity.EQUIPMENT, lore);
+
         player.sendMessage("Spawned " + type.name());
-        Interactable interactable = new Interactable(0, 0, rayTraceResult.getHitBlock().getLocation().add(0.5, 0, 0.5), type);
+        Interactable interactable = new Interactable(0, 0, item, rayTraceResult.getHitBlock().getLocation().add(0.5, 0, 0.5), type);
 
         plugin.getSceneDirector().addInteractable(interactable);
 
