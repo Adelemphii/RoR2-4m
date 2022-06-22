@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import tech.adelemphii.ror24m.RoR24m;
-import tech.adelemphii.ror24m.directors.interactables.Interactable;
+import tech.adelemphii.ror24m.directors.objects.interactables.Interactable;
 
 public class InteractableListeners implements Listener {
 

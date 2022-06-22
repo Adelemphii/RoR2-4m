@@ -2,17 +2,16 @@ package tech.adelemphii.ror24m.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Subcommand;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.util.RayTraceResult;
 import tech.adelemphii.ror24m.RoR24m;
-import tech.adelemphii.ror24m.directors.interactables.Interactable;
-import tech.adelemphii.ror24m.directors.interactables.InteractableType;
-import tech.adelemphii.ror24m.directors.item.Item;
-import tech.adelemphii.ror24m.directors.item.ItemRarity;
+import tech.adelemphii.ror24m.directors.objects.interactables.Interactable;
+import tech.adelemphii.ror24m.directors.objects.interactables.InteractableType;
+import tech.adelemphii.ror24m.directors.objects.item.Item;
+import tech.adelemphii.ror24m.directors.objects.item.ItemRarity;
 
 @CommandAlias("ror24m|ror2")
 public class TestCommand extends BaseCommand {

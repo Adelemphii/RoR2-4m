@@ -1,4 +1,4 @@
-package tech.adelemphii.ror24m.directors.interactables;
+package tech.adelemphii.ror24m.directors.objects.interactables;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -13,7 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 import tech.adelemphii.ror24m.RoR24m;
-import tech.adelemphii.ror24m.directors.item.Item;
+import tech.adelemphii.ror24m.directors.objects.item.Item;
 
 public class Interactable {
 
@@ -27,7 +27,8 @@ public class Interactable {
     private final InteractableType type;
 
     private final BoundingBox boundingBox;
-    private final Entity armorStand;
+    private Entity armorStand;
+    private Entity costArmorStand;
 
     public Interactable(int cost, int creditDrop, Item itemDrop, Location location, InteractableType type) {
         this.cost = cost;
@@ -39,13 +40,32 @@ public class Interactable {
         this.boundingBox = new BoundingBox(location.getX(), location.getY(), location.getZ(),
                 location.getX(), location.getY(), location.getZ()).expand(3);
 
+        prepArmorStand();
+
+    }
+
+    private void prepArmorStand() {
         this.armorStand = location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.setCustomNameVisible(true);
-        armorStand.customName(Component.text("Press F to open " + type.name()).color(NamedTextColor.GOLD));
+        armorStand.customName(Component.text("Press ").color(NamedTextColor.GOLD)
+                .append(Component.keybind().keybind("key.swapOffhand").color(NamedTextColor.GOLD))
+                .append(Component.text(" to open " + type.name()).color(NamedTextColor.GOLD)));
         armorStand.setGravity(false);
         armorStand.setInvulnerable(true);
         ((ArmorStand) armorStand).setVisible(false);
 
+        if(cost > 0) {
+            prepCostArmorStand();
+        }
+    }
+
+    private void prepCostArmorStand() {
+        this.costArmorStand = location.getWorld().spawnEntity(location.subtract(0, 0.5, 0), EntityType.ARMOR_STAND);
+        costArmorStand.setCustomNameVisible(true);
+        costArmorStand.customName(Component.text("$" + cost).color(NamedTextColor.GOLD));
+        costArmorStand.setGravity(false);
+        costArmorStand.setInvulnerable(true);
+        ((ArmorStand) costArmorStand).setVisible(false);
     }
 
     public Item getItemDrop() {
@@ -82,6 +102,10 @@ public class Interactable {
 
     public Entity getArmorStand() {
         return armorStand;
+    }
+
+    public Entity getCostArmorStand() {
+        return costArmorStand;
     }
 
     public void dropItemRoR2() {

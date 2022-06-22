@@ -1,4 +1,4 @@
-package tech.adelemphii.ror24m.directors.item;
+package tech.adelemphii.ror24m.directors.objects.item;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
